@@ -1,0 +1,24 @@
+# Rebuilds dennisludvino.com when posts change, by calling the portfolio's
+# Cloudflare Deploy Hook. The hook URL is the CLOUDFLARE_DEPLOY_HOOK secret
+# (see README.md). Until it's set, this does nothing.
+name: Publish to dennisludvino.com
+
+on:
+  push:
+    branches: [master]
+    paths: ['posts/**']
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger the portfolio build
+        env:
+          HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "CLOUDFLARE_DEPLOY_HOOK isn't set yet; skipping. See README.md."
+            exit 0
+          fi
+          curl --fail --silent --show-error -X POST "$HOOK"
