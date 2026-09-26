@@ -58,14 +58,19 @@ README.
 
 ## Previewing locally
 
-Clone both repos side by side, then start the portfolio pointed at this one:
+Keep this repo cloned inside the portfolio folder, as `sketches/`. The
+portfolio ignores that folder, so the two repos stay separate: run `git`
+here for posts, and in the portfolio folder for the site.
 
 ```
 cd portfolio
-SKETCHES_DIR=../sketches npm start
+git clone https://github.com/dludvino/sketches.git sketches
+npm start
 ```
 
-Posts update as you save, drafts included.
+The portfolio finds the clone on its own and shows posts as you save,
+drafts and unpushed edits included. Its `npm run check` checks them too.
+(A clone somewhere else works with `SKETCHES_DIR=path/to/sketches npm start`.)
 
 ## Publishing
 
