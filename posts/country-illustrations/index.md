@@ -5,7 +5,6 @@ summary: Illustrated country maps on textured cards.
 cover:
   src: ./japan-cover.jpg
   alt: Illustrated green map of Japan labeled “JAPAN” on a cream card with a red border
-draft: true
 ---
 
 I don't remember exactly what these illustrations were used for, but I like the vibe they give off. I think I must have been looking at "The Believer" magazine a lot when I made them. 

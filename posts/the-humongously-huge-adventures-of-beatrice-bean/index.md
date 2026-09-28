@@ -5,7 +5,6 @@ summary: Illustrations for a picture book about a very small bean with very big 
 cover:
   src: ./bean-cover.png
   alt: Beatrice Bean in goggles and a scarf standing on a snowy peak, with the text “She climbed to the tippity top of Mount Everest.”
-draft: true
 ---
 
 When my niece was born, I made this book for my brother and his wife as a Christmas gift. The story catalogues the life of the tiny Beatrice Bean as she fearlessly tackles adventures of all sizes. 
