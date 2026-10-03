@@ -1,0 +1,30 @@
+---
+// A self-hosted video. Import the MP4 and a poster still at the top of the
+// .mdx, then wrap the video in a <Figure>:
+//
+//   import episode1 from './episode-1.mp4';
+//   import episode1Poster from './episode-1-poster.jpg';
+//
+//   <Figure plain><Video src={episode1} poster={episode1Poster} label="Episode 1" /></Figure>
+//
+// Encode MP4s as H.264/AAC with `-movflags +faststart` so playback starts
+// before the download finishes. preload="none" keeps the page from fetching
+// any video until someone presses play.
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+
+interface Props {
+  src: string;
+  poster: ImageMetadata;
+  // Screen-reader name, e.g. the episode title.
+  label: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, poster, label, width = 1920, height = 1080 } = Astro.props;
+const posterImage = await getImage({ src: poster });
+---
+<video controls playsinline preload="none" width={width} height={height} poster={posterImage.src} aria-label={label}>
+  <source src={src} type="video/mp4" />
+</video>

@@ -1,0 +1,5 @@
+---
+// `### Heading` in a page's markdown: a group heading inside a section.
+const { id } = Astro.props;
+---
+<h3 id={id} class="case-study-section__subtitle case-study-section__subtitle--group"><slot /></h3>

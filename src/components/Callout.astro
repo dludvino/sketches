@@ -1,0 +1,14 @@
+---
+// A pull-quote box (.case-study-callout):
+//
+//   <Callout title="Guiding Question">How do we deliver…?</Callout>
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+<article class="case-study-callout" aria-label={title}>
+  <h3 class="case-study-callout__title">{title}</h3>
+  <p class="case-study-callout__text"><slot /></p>
+</article>

@@ -1,0 +1,87 @@
+---
+// Every page's shell: <head> (title, share tags, stylesheet, favicons), the
+// banner, <main>, and the footer. Pages add their own scripts in their body;
+// anything that belongs after the footer (e.g. the lightbox) goes in slot="end".
+import Banner from '../components/Banner.astro';
+import Footer from '../components/Footer.astro';
+import { Font } from 'astro:assets';
+import '../css/styles.css';
+
+interface ShareImage {
+  src: string; // a path under public/, e.g. /assets/images/Book.png
+  width: number;
+  height: number;
+  alt: string;
+}
+
+interface Props {
+  // The page title, also used as og:title. " | Sketch Book" is appended to
+  // <title> unless fullTitle is set.
+  title: string;
+  fullTitle?: string;
+  description: string;
+  ogType?: 'website' | 'article';
+  // The link-preview image; without one, previews use the small card.
+  image?: ShareImage;
+  share?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  fullTitle = `${title} | Sketch Book`,
+  description,
+  ogType = 'article',
+  image,
+  share = true,
+  noindex = false,
+} = Astro.props;
+
+// Extensionless, like the site's links: /book-design, not /book-design.html.
+const pagePath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/');
+const pageUrl = new URL(pagePath, Astro.site).href;
+const imageUrl = image && new URL(image.src, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <Font cssVariable="--font-plex-sans" preload={[{ weight: 400 }, { weight: 300 }]} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {share && (
+      <>
+        <meta property="og:type" content={ogType} />
+        <meta property="og:site_name" content="Denny Ludvino" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={pageUrl} />
+        {image && (
+          <>
+            <meta property="og:image" content={imageUrl} />
+            <meta property="og:image:width" content={String(image.width)} />
+            <meta property="og:image:height" content={String(image.height)} />
+            <meta property="og:image:alt" content={image.alt} />
+          </>
+        )}
+        <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+      </>
+    )}
+    <link rel="icon" type="image/svg+xml" sizes="16x16" href="/assets/images/favicon/favicon-16.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="32x32" href="/assets/images/favicon/favicon-32.svg" />
+    <link rel="icon" type="image/svg+xml" sizes="48x48" href="/assets/images/favicon/favicon-48.svg" />
+  </head>
+  <body id="top">
+    <Banner />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <slot name="end" />
+    <script>
+      import '../js/banner.js';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+---
+// Image + description rows, e.g. comparing modes or options:
+//
+//   <FeatureList label="Adaptive AI modes">
+//   <Feature title="Co Abi" image="/assets/images/case-study/ai/ai-3-co-abi.png" alt="Co Abi mode interface">
+//
+//   Co Pilot style chat interface…
+//
+//   - ![](/assets/images/case-study/ai/Context.svg) full context
+//   - ![](/assets/images/case-study/ai/Control.svg) shared control
+//
+//   </Feature>
+//   </FeatureList>
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+<div class="case-study-feature-list" role="list" aria-label={label}>
+  <slot />
+</div>

@@ -1,0 +1,76 @@
+---
+// A row of images (.case-study-image-grid). Write the images as plain
+// markdown inside it, one per line:
+//
+//   <ImageGrid cols={3} plain label="Cover concepts for Millrat">
+//   ![Millrat concept: heavy black title…](./millrat-concept-1.png)
+//   ![Millrat concept: serif title on cream…](./millrat-concept-2.png)
+//   </ImageGrid>
+//
+// A line of text after the images becomes a caption row across the grid, so
+// one grid can hold "before" images, a caption, "after" images, and another
+// caption. Each image is wrapped in its own grid item, which the lightbox
+// (image-modal.js) picks up.
+import { lazy } from '../lib/images';
+
+interface Props {
+  // Columns on wide screens: 2 for landscape, 3 for portrait (covers,
+  // pages), 4 for small frames (storyboard panels).
+  cols?: 2 | 3 | 4;
+  // Drop the image frames, for images with their own shape.
+  plain?: boolean;
+  // Give each image its own frame and caption, taken from the markdown
+  // image title: ![Alt](src "100% Scale").
+  framed?: boolean;
+  // Screen-reader name for the group, e.g. "Final cover designs".
+  label: string;
+}
+
+const { cols, plain = false, framed = false, label } = Astro.props;
+const html = await Astro.slots.render('default');
+
+// Flatten the rendered markdown into images and caption paragraphs, in order.
+const BREAK = '\u0000';
+const flat = html.replace(/<p\b[^>]*>/g, '').replace(/<\/p>/g, BREAK);
+type Item = { img: string; title?: string } | { caption: string };
+const items: Item[] = [];
+for (const part of flat.split(/(<img\b[^>]*>)/)) {
+  if (part.startsWith('<img')) {
+    const title = part.match(/\stitle="([^"]*)"/)?.[1];
+    items.push({ img: lazy(part.replace(/\stitle="[^"]*"/, '')), title });
+  } else {
+    for (const text of part.split(BREAK)) {
+      if (text.trim()) items.push({ caption: text.trim() });
+    }
+  }
+}
+// A caption with more images after it gets a little space below.
+const hasImagesAfter = (index: number) => items.slice(index + 1).some((item) => 'img' in item);
+---
+<div
+  class:list={[
+    'case-study-image-grid',
+    cols && `case-study-image-grid--cols-${cols}`,
+    { 'case-study-image-grid--plain': plain },
+  ]}
+  role="list"
+  aria-label={label}
+>
+  {items.map((item, index) =>
+    'caption' in item ? (
+      <p
+        class:list={['case-study-image-grid__caption', { 'case-study-image-grid__caption--spaced': hasImagesAfter(index) }]}
+        set:html={item.caption}
+      />
+    ) : framed ? (
+      <figure class="case-study-figure" role="listitem">
+        <div class="case-study-figure__media"><Fragment set:html={item.img} /></div>
+        {item.title && <figcaption class="case-study-figure__caption" set:html={item.title} />}
+      </figure>
+    ) : (
+      <figure class="case-study-image-grid__item" role="listitem">
+        <Fragment set:html={item.img} />
+      </figure>
+    ),
+  )}
+</div>

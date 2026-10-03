@@ -1,0 +1,72 @@
+---
+// One page per post, at /<folder name>. Drafts only appear
+// in `npm start`.
+import { getImage, Image } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageModal from '../components/ImageModal.astro';
+import { mdxComponents } from '../lib/mdx-components';
+import { formatDate, getSketches, type Sketch } from '../lib/pages';
+
+export async function getStaticPaths() {
+  return (await getSketches()).map((sketch) => ({ params: { slug: sketch.id }, props: { sketch } }));
+}
+
+const { sketch } = Astro.props as { sketch: Sketch };
+const { title, date, summary, cover } = sketch.data;
+const { Content } = await render(sketch);
+
+// The link-preview image: the cover as a JPEG at most 1200px wide, which
+// every preview service accepts. (Astro only publishes images it processes,
+// so the original file has no URL of its own.) JPEG has no transparency, so
+// a transparent cover gets a white background rather than black.
+const shareImage =
+  cover &&
+  (await getImage({ src: cover.src, width: Math.min(cover.src.width, 1200), format: 'jpg', background: '#fff' }));
+---
+<BaseLayout
+  title={title}
+  description={summary}
+  image={
+    shareImage && {
+      src: shareImage.src,
+      width: Number(shareImage.attributes.width),
+      height: Number(shareImage.attributes.height),
+      alt: cover.alt,
+    }
+  }
+>
+  <article class="case-study-section case-study-section--plain sketch" aria-labelledby="sketch-title">
+    <div class="sketch__back">
+      <a class="case-study-intro__back" href="/">&larr; Back</a>
+    </div>
+    <header class="sketch__header">
+      <h1 id="sketch-title" class="case-study-section__title case-study-section__title--light">{title}</h1>
+      <time class="sketch__date" datetime={date.toISOString().slice(0, 10)}>{formatDate(date)}</time>
+    </header>
+    {cover && (
+      <figure class="case-study-figure case-study-figure--plain sketch__cover">
+        <div class="case-study-figure__media">
+          <Image
+            src={cover.src}
+            alt={cover.alt}
+            widths={[480, 800, 1200, 1600].filter((w) => w < cover.src.width).concat(Math.min(cover.src.width, 2000))}
+            sizes="(min-width: 840px) 760px, 100vw"
+            loading="eager"
+          />
+        </div>
+      </figure>
+    )}
+    <div class="sketch__body case-study-plain-images">
+      {/* .md posts render plain elements (styled via .sketch__body in
+          components.css); .mdx posts also get the detail-page components. */}
+      <Content components={mdxComponents} />
+    </div>
+  </article>
+
+  <ImageModal slot="end" />
+
+  <script>
+    import '../js/image-modal.js';
+  </script>
+</BaseLayout>

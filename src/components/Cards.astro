@@ -1,0 +1,20 @@
+---
+// Side-by-side cards (.case-study-cards), e.g. Business Goals / Objectives:
+//
+//   <Cards label="Overview details">
+//   <Card id="business-goals" title="Business Goals">
+//
+//   - Establish a coherent AI strategy…
+//
+//   </Card>
+//   </Cards>
+interface Props {
+  // Screen-reader name for the group.
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+<div class="case-study-cards" role="list" aria-label={label}>
+  <slot />
+</div>

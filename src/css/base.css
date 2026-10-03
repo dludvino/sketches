@@ -1,0 +1,632 @@
+/* IBM Plex Sans is loaded by Astro's Fonts API (astro.config.mjs), which
+   defines --font-plex-sans. */
+:root {
+  /* color */
+
+  --color-primary: var(--color-purple-500);
+  --color-black-100: #000000;
+  --color-black-40: #00000066;
+  --color-black-8: #00000014;
+  --color-blue-100: #b5c5ff;
+  --color-blue-300: #7ba1ff;
+  --color-blue-500: #0080ff;
+  --color-blue-700: #1f59af;
+  --color-blue-900: #204789;
+  --color-charcoal-100: #dbdcdd;
+  --color-charcoal-300: #979a9c;
+  --color-charcoal-500: #595c5f;
+  --color-charcoal-700: #3c3f43;
+  --color-charcoal-900: #212529;
+  --color-green-100: #eaffe3;
+  --color-green-300: #bdffaa;
+  --color-green-500: #00ff00;
+  --color-green-700: #226619;
+  --color-green-900: #1c4415;
+  --color-orange-100: #ffc99c;
+  --color-orange-300: #ffa55b;
+  --color-orange-500: #ff8000;
+  --color-orange-700: #b05b10;
+  --color-orange-900: #673811;
+  --color-pink-100: #ffb3ff;
+  --color-pink-300: #ff78ff;
+  --color-pink-500: #ff00ff;
+  --color-pink-700: #b01daf;
+  --color-pink-900: #671d66;
+  --color-purple-100: #f2e0ff;
+  --color-purple-200: #d3a2ff;
+  --color-purple-500: #8000ff;
+  --color-purple-700: #4b158a;
+  --color-purple-900: #2a1244;
+  --color-surface-0: var(--color-white-100);
+  --color-surface-1: #f6f6f6;
+  --color-surface-2: #e6e6e6;
+  --color-surface-3: #d6d6d6;
+  --color-text-link: var(--color-blue-500);
+  --color-text-subtle: var(--color-charcoal-500);
+  --color-text-default: var(--color-charcoal-900);
+  --color-white-100: #ffffff;
+  --color-white-12: #ffffff1f;
+  --color-white-24: #ffffff3d;
+  --color-white-48: #ffffff7a;
+  --color-white-64: #ffffffa3;
+
+  /* Hero section — dark surface */
+  --color-hero-bg-start: #232731;
+  --color-hero-bg-mid: #303540;
+  --color-hero-bg-end: #262b34;
+  --color-hero-text-primary: var(--color-white-100);
+  --color-hero-text-secondary: rgba(255, 255, 255, 0.90);
+  --color-hero-text-emphasis: var(--color-purple-100);
+  --color-hero-cursor-fill: var(--color-white-100);
+  --color-hero-cursor-outline: var(--color-purple-500);
+
+  --color-bg: var(--color-surface-1);
+  --color-fg: #222;
+  --color-accent: var(--color-orange-500);
+  --color-muted: #666;
+  --max-width:1152px;
+}
+/* Typography design tokens */
+:root{
+  /* Font family */
+  --type-font-family: var(--font-plex-sans);
+
+  /* Font weights (numeric values preferred for consistent rendering) */
+  --type-weight-light: 300;
+  --type-weight-regular: 400;
+  --type-weight-medium: 500;
+  --type-weight-bold: 700;
+
+  /* Body / scale */
+  --type-body-1-size: 1rem;         /* 16px */
+  --type-body-1-ls: 0.0312rem;
+  --type-body-2-size: 0.875rem;     /* 14px */
+  --type-body-2-ls: 0.0156rem;
+  --type-case-study-body-size: 1.125rem; /* 18px */
+  --type-case-study-body-ls: var(--type-body-1-ls);
+  --type-body-line-height: 1.5;
+  --featured-card-text: 1.25rem;    /* 20px */
+
+  /* Button */
+  --type-button-size: 0.75rem;      /* 12px */
+  --type-button-ls: 0.0781rem;
+  --type-button-line-height: 1;
+
+  /* Caption */
+  --type-caption-size: 0.6875rem;   /* 11px */
+  --type-caption-ls: 0.025rem;
+  --type-caption-line-height: 1.2;
+
+  /* Headings */
+  --type-h1-size: 5.3125rem;
+  --type-h1-ls: -0.0938rem;
+  --type-h1-line-height: 1.05;
+
+  --type-h2-size: 3.3125rem;
+  --type-h2-ls: -0.0312rem;
+  --type-h2-line-height: 1.08;
+
+  --type-h3-size: 2.625rem;
+  --type-h3-ls: 0rem;
+  --type-h3-line-height: 1.1;
+
+  --type-h4-size: 1.875rem;
+  --type-h4-ls: 0.0156rem;
+  --type-h4-line-height: 1.2;
+
+  --type-h5-size: 1.3125rem;
+  --type-h5-ls: 0rem;
+  --type-h5-line-height: 1.25;
+
+  --type-h6-size: 1.125rem;
+  --type-h6-ls: 0.0094rem;
+  --type-h6-line-height: 1.3;
+
+  /* Subtitles */
+  --type-subtitle-1-size: 0.875rem;
+  --type-subtitle-1-ls: 0.0094rem;
+  --type-subtitle-2-size: 0.75rem;
+  --type-subtitle-2-ls: 0.0063rem;
+
+  /* Hero section typography */
+  --type-hero-body-size: clamp(1.5rem, 3.1vw, 2.65rem);
+  --type-hero-body-ls: 0.01em;
+
+  /* Hero section vertical rhythm (kept independent of --spacing-section-margin-y
+     so the hero stays compact/above-the-fold regardless of that token's growth
+     at larger breakpoints) */
+  --spacing-hero-padding-y: clamp(1.5rem, 4vh, 2.5rem);
+  /* 60% of the window's height, but no more than half its width: the hero
+     text scales with the width (--type-hero-body-size), so on narrow, tall
+     screens a height-only minimum left it floating in empty space. */
+  --spacing-hero-min-height: min(60vh, 50vw);
+
+  /* Button tokens */
+  --type-button-height: 40px;
+  --type-button-hover-bg: var(--color-purple-100);
+
+  /* Case study card tokens */
+  --card-case-min-width: 18.75rem;
+  --card-case-max-width: 47.6875rem;
+  --card-case-min-height: 27.0625rem;
+  --card-case-bg: var(--color-white-100);
+  --card-case-pad-x: 1.5rem;
+  --card-case-pad-top: 1.5rem;
+  --card-case-pad-bottom: 1.5rem;
+  --card-case-gap-top: 1.5rem;
+  --card-case-gap-body: 1.5rem;
+  --card-case-brand-size: 5.375rem;
+  --card-case-brand-hole: 2.9rem;
+  --card-case-brand-tail-width: 0.95rem;
+  --card-case-brand-tail-height: 2.85rem;
+  --card-case-tag-gap: 0.875rem;
+  --card-case-tag-pad-x: 0.75rem;
+  --card-case-tag-pad-y: 0.35rem;
+  --card-case-tag-bg: var(--color-purple-100);
+  --card-case-tag-text: var(--color-primary);
+  --card-case-tag-size: 0.625rem;
+  --card-case-tag-ls: 0.09em;
+  /* .card__tags--compact: small tags beside a title (Sketch Book cards) */
+  --card-tag-compact-gap: var(--spacing-gap-4);
+  --card-tag-compact-pad-x: 0.35rem;
+  --card-tag-compact-pad-y: 0.15rem;
+  --card-case-title-size: 3.5rem;
+  --card-case-title-line: 1.1;
+  --card-case-body-size: 2.625rem;
+  --card-case-body-line: 1.35;
+  --card-case-body-max-width: 57.5rem;
+  --card-case-body-lines: 6;
+  --card-case-link-size: 2.875rem;
+  --card-case-link-color: var(--color-blue-500);
+
+  /* Case study card responsive tokens */
+  --card-case-title-size-tablet: 2.6rem;
+  --card-case-body-size-tablet: 2rem;
+  --card-case-tag-size-tablet: 1.15rem;
+  --card-case-link-size-tablet: 2rem;
+
+  --card-case-title-size-mobile: 1.8rem;
+  --card-case-body-size-mobile: 1.3rem;
+  --card-case-tag-size-mobile: 0.7rem;
+  --card-case-link-size-mobile: 1.4rem;
+
+  /* Full-width card tokens */
+  --card-full-bg: var(--color-white-100);
+  --card-full-border: var(--color-charcoal-100);
+  --card-full-radius: 0.875rem;
+  --card-full-min-height: 20rem;
+  --card-full-gap: 2rem;
+  --card-full-pad: 2rem;
+  --card-full-media-min: 16rem;
+  --card-full-title-size: var(--type-h4-size);
+  --card-full-title-line: var(--type-h4-line-height);
+  --card-full-text-size: var(--type-body-1-size);
+  --card-full-text-line: var(--type-body-line-height);
+  --card-full-link-size: var(--type-body-1-size);
+
+  /* Case studies section token */
+  --type-case-studies-title-size: var(--type-h3-size);
+
+  /* legacy string tokens (kept for compatibility) */
+  --font-family: 'IBM Plex Sans';
+  --light: Light;
+  --normal: Regular;
+  --medium: Medium;
+  --bold: Bold;
+
+  /* Responsive Spacing Tokens */
+  /* Mobile (402px) - Default/Base */
+  --spacing-page-padding-x: 1.5rem;
+  --spacing-page-margin: 0;
+  --spacing-section-padding-x: 1.5rem;
+  --spacing-section-margin-y: 4rem;
+  --spacing-component-padding-x: 1rem;
+  --spacing-component-margin-y: 1rem;
+  --spacing-gap: 1rem;
+  --spacing-gap-4: 0.25rem;
+  --spacing-gap-8: 0.5rem;
+  --spacing-gap-16: 1rem;
+  --spacing-gap-24: 1.5rem;
+  --spacing-gap-32: 2rem;
+  --spacing-gap-40: 2.5rem;
+  --spacing-gap-48: 3rem;
+  --spacing-gap-64: 4rem;
+  --spacing-gap-128: 8rem;
+
+  /* Case study section spacing */
+  --spacing-cs-section-content: 1.5rem;
+  --spacing-cs-section-padding: 2rem;
+
+  /* Detail page (case study / project) content width */
+  --detail-content-max-width: var(--card-case-max-width);
+  /* The single column of a Sketch Book post. */
+  --sketch-content-max-width: 47.5rem;
+}
+
+/* Tablet (844px) */
+@media (min-width: 844px) {
+  :root {
+    --spacing-page-padding-x: 2rem;
+    --spacing-page-margin: 0;
+    --spacing-section-padding-x: 2.5rem;
+    --spacing-section-margin-y: 7.5rem;
+    --spacing-component-padding-x: 1.5rem;
+    --spacing-component-margin-y: 1.5rem;
+    --spacing-gap: 1.5rem;
+  }
+}
+
+/* Desktop (1400px) */
+@media (min-width: 1400px) {
+  :root {
+    --spacing-page-padding-x: 9rem;
+    --spacing-page-margin: 0;
+    --spacing-section-padding-x: 4rem;
+    --spacing-section-margin-y: 10rem;
+    --spacing-component-padding-x: 2rem;
+    --spacing-component-margin-y: 2rem;
+    --spacing-gap: 2rem;
+  }
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+/* Always reserve the scrollbar's space, so moving between a long page and a
+   short one (e.g. the Sketch Book) doesn't shift the fixed banner sideways when
+   scrollbars are set to always show. */
+html{scrollbar-gutter:stable}
+html{scroll-behavior:smooth;scroll-padding-top:4rem}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+}
+body{
+  margin:0;
+  padding-top:48px;
+  font-family:var(--type-font-family);
+  font-size:var(--type-body-1-size);
+  letter-spacing:var(--type-body-1-ls);
+  color:var(--color-fg);
+  background:var(--color-bg);
+  line-height:var(--type-body-line-height);
+}
+.container{max-width:var(--max-width);margin:0 auto;padding:0}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:1rem 0}
+.logo{font-weight:700;color:var(--color-accent);text-decoration:none;display:flex;align-items:center}.logo img{display:block}
+.main-nav a{margin-left:1rem;color:var(--color-muted);text-decoration:none}
+.main-nav a:hover{color:var(--color-fg)}
+.hero{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  margin:0;
+  padding:var(--spacing-hero-padding-y) var(--spacing-section-padding-x);
+  min-height:var(--spacing-hero-min-height);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  color:var(--color-hero-text-primary);
+  background:
+    radial-gradient(120% 70% at 68% 48%, rgba(110, 122, 139, 0.18) 0%, transparent 65%),
+    radial-gradient(95% 115% at 8% -8%, rgba(103, 114, 133, 0.36) 0%, transparent 64%),
+    linear-gradient(132deg, var(--color-hero-bg-start) 0%, var(--color-hero-bg-mid) 44%, var(--color-hero-bg-end) 100%);
+}
+
+.hero-noise-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 100% 55% at 50% 0%,   rgba(0,0,0,0.38) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 55% at 50% 100%, rgba(0,0,0,0.32) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 100% at 0%   50%, rgba(0,0,0,0.22) 0%, transparent 100%),
+    radial-gradient(ellipse 30% 100% at 100% 50%, rgba(0,0,0,0.22) 0%, transparent 100%);
+}
+
+.hero .container{
+  max-width:var(--max-width);
+  position:relative;
+  z-index:2;
+}
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+}
+
+/* Hides text visually but keeps it for screen readers and search engines
+   (e.g. the home page's h1, which the hero no longer shows). */
+.visually-hidden{
+  position:absolute;
+  width:1px;
+  height:1px;
+  margin:-1px;
+  padding:0;
+  overflow:hidden;
+  clip:rect(0 0 0 0);
+  white-space:nowrap;
+  border:0;
+}
+
+.lead-hero{
+  margin:0;
+  max-width:none;
+  font-family:var(--type-font-family);
+  font-size:var(--type-hero-body-size);
+  line-height:1.3;
+  letter-spacing:var(--type-hero-body-ls);
+  font-weight:var(--type-weight-light);
+  color:var(--color-hero-text-secondary);
+}
+
+.lead-hero + .lead-hero{
+  margin-top:clamp(1rem, 2vw, 1.5rem);
+}
+
+.lead-hero em{
+  font-style:italic;
+  font-weight:var(--type-weight-medium);
+  color:var(--color-hero-text-emphasis);
+}
+
+.hero-note{
+  margin:clamp(0.75rem, 1.5vw, 1.25rem) 0 0;
+  max-width:none;
+  font-family:var(--type-font-family);
+  font-size:var(--type-hero-body-size);
+  line-height:1.4;
+  font-style:italic;
+  font-weight:var(--type-weight-light);
+  color:var(--color-hero-text-secondary);
+}
+
+/* Waving-hand cursor. hero-cursor.js adds .hero--wave-cursor only for a mouse
+   (fine hover pointer) without reduced motion, moves the hand by setting its
+   `translate` and waves it by setting the SVG's `rotate` (wave speed and size
+   are constants at the top of that script). The anchor (center of the wrist,
+   measured from the art's viewBox) sits on the pointer and is also the pivot of
+   the wave; re-measure it if the illustration changes. Links keep the normal
+   pointer. */
+.hero--wave-cursor{cursor:none}
+.hero--wave-cursor a{cursor:pointer}
+
+.hero-cursor{
+  --hero-cursor-size:4rem;
+  --hero-cursor-anchor-x:67%;
+  --hero-cursor-anchor-y:99%;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:3;
+  width:var(--hero-cursor-size);
+  aspect-ratio:75.64 / 96.13;
+  pointer-events:none;
+  opacity:0;
+  /* applied after the JS-set `translate`, so the anchor lands on the pointer */
+  transform:translate(calc(-1 * var(--hero-cursor-anchor-x)), calc(-1 * var(--hero-cursor-anchor-y)));
+  transition:opacity .15s ease;
+  will-change:translate;
+}
+
+.hero-cursor.is-visible{opacity:1}
+
+.hero-cursor__hand{
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:visible;
+  transform-origin:var(--hero-cursor-anchor-x) var(--hero-cursor-anchor-y);
+  will-change:rotate;
+}
+
+/* the outline is a filled shape, not a stroke, so both paths color via fill */
+.hero-cursor__fill{fill:var(--color-hero-cursor-fill)}
+.hero-cursor__outline{fill:var(--color-hero-cursor-outline)}
+
+.caption{font-size:var(--type-caption-size);letter-spacing:var(--type-caption-ls);line-height:var(--type-caption-line-height);color:var(--color-text-subtle)}
+
+/* Headings using tokens (basic defaults; component variants may override) */
+h1{font-family:var(--type-font-family);font-weight:var(--type-weight-bold);font-size:var(--type-h1-size);letter-spacing:var(--type-h1-ls);line-height:var(--type-h1-line-height);margin:.67em 0}
+h2{font-family:var(--type-font-family);font-weight:var(--type-weight-bold);font-size:var(--type-h2-size);letter-spacing:var(--type-h2-ls);line-height:var(--type-h2-line-height);margin:.75em 0}
+h3{font-family:var(--type-font-family);font-weight:var(--type-weight-bold);font-size:var(--type-h3-size);letter-spacing:var(--type-h3-ls);line-height:var(--type-h3-line-height);margin:.83em 0}
+h4{font-family:var(--type-font-family);font-weight:var(--type-weight-medium);font-size:var(--type-h4-size);letter-spacing:var(--type-h4-ls);line-height:var(--type-h4-line-height);margin:.83em 0}
+h5{font-family:var(--type-font-family);font-weight:var(--type-weight-medium);font-size:var(--type-h5-size);letter-spacing:var(--type-h5-ls);line-height:var(--type-h5-line-height);margin:1em 0}
+h6{font-family:var(--type-font-family);font-weight:var(--type-weight-medium);font-size:var(--type-h6-size);letter-spacing:var(--type-h6-ls);line-height:var(--type-h6-line-height);margin:1em 0}
+
+.subtitle-1{font-size:var(--type-subtitle-1-size);letter-spacing:var(--type-subtitle-1-ls)}
+.subtitle-2{font-size:var(--type-subtitle-2-size);letter-spacing:var(--type-subtitle-2-ls)}
+.content{padding:2rem 0}
+
+.site-footer{border-top:1px solid #eee;padding:1rem 0;color:var(--color-muted)}
+
+/* About section */
+.about{
+  background-color:var(--color-surface-1);
+  margin:0;
+  padding:var(--spacing-section-margin-y) var(--spacing-section-padding-x);
+}
+
+.about__inner{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  gap:0;
+  flex:1 0 0;
+}
+
+.about__title{
+  display:inline-block;
+  margin:0 0 3rem 0;
+  padding:0;
+  font-family:var(--type-font-family);
+  font-size:var(--type-case-studies-title-size);
+  line-height:var(--type-h3-line-height);
+  letter-spacing:var(--type-h3-ls);
+  font-weight:var(--type-weight-light);
+  color:var(--color-primary);
+  background:var(--color-purple-100);
+  border-bottom:1px solid var(--color-primary);
+}
+
+.about__layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--spacing-gap-24);
+  width:100%;
+}
+
+.about__body{
+  display:flex;
+  flex-direction:column;
+  gap:var(--spacing-gap-16);
+}
+
+.about__tldr{
+  margin:0 0 var(--spacing-gap-16);
+  display:flex;
+  width:100%;
+  align-items:center;
+  justify-content:center;
+  padding:var(--spacing-gap-24);
+  background:var(--color-white-64);
+  border:none;
+  border-bottom:1px solid var(--color-purple-100);
+  font-size:var(--type-body-1-size);
+  line-height:normal;
+  letter-spacing:var(--type-body-1-ls);
+  color:var(--color-text-default);
+}
+
+.about__tldr p{
+  margin:0;
+  flex:1 0 0;
+}
+
+.about__body p{
+  margin:0;
+  font-size:var(--type-body-1-size);
+  line-height:var(--type-body-line-height);
+  letter-spacing:var(--type-body-1-ls);
+  color:var(--color-text-default);
+}
+
+.about__timeline{
+  display:flex;
+  width:367px;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:var(--spacing-gap-16);
+}
+
+.about__timeline-title{
+  margin:0;
+  height:28px;
+  padding:0 12px 0 2px;
+  font-family:'IBM Plex Mono', var(--type-font-family);
+  font-size:1.5rem;
+  line-height:1;
+  letter-spacing:var(--type-h4-ls);
+  font-weight:var(--type-weight-bold);
+  color:var(--color-primary);
+}
+
+.timeline{
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  width:100%;
+}
+
+.timeline__item{
+  display:flex;
+  height:59px;
+  flex-direction:column;
+  align-items:flex-start;
+  align-self:stretch;
+  justify-content:flex-start;
+  position:relative;
+  overflow:clip;
+}
+
+.timeline__item:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  left:20px;
+  top:20px;
+  transform:translateX(-50%);
+  width:1px;
+  height:35px;
+  background:var(--color-purple-200);
+  opacity:0.6;
+}
+
+.timeline__year{
+  position:absolute;
+  top:0;
+  left:0;
+  width:40px;
+  font-size:var(--type-body-2-size);
+  line-height:1.2;
+  font-weight:var(--type-weight-bold);
+  color:var(--color-purple-200);
+  text-align:center;
+  margin:0;
+  padding:0;
+}
+
+.timeline__event{
+  margin-left:calc(40px + var(--spacing-gap-24));
+  font-size:var(--type-body-2-size);
+  line-height:var(--type-body-line-height);
+  letter-spacing:var(--type-body-1-ls);
+  color:var(--color-text-default);
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.timeline__year,
+.timeline__event{
+  align-self:start;
+}
+
+@media (max-width:844px){
+  .about__timeline{
+    width:100%;
+  }
+}
+
+@media (min-width:844px){
+  .about__layout{
+    grid-template-columns:1fr 367px;
+    align-items:start;
+  }
+}
+
+@media (max-width:600px){
+  .header-inner{flex-direction:row}
+  .main-nav{display:none}
+
+  .lead-hero{
+    max-width:34ch;
+    line-height:1.34;
+  }
+
+  .hero-note{
+    max-width:34ch;
+    line-height:1.42;
+  }
+}

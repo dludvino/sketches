@@ -1,0 +1,14 @@
+---
+// One concept in <IconCards>. The icon is a 24px image under public/.
+interface Props {
+  icon: string;
+  title: string;
+}
+
+const { icon, title } = Astro.props;
+---
+<article class="case-study-icon-card" role="listitem">
+  <img loading="lazy" src={icon} alt={`${title} icon`} class="case-study-icon-card__icon" width="24" height="24" />
+  <h4 class="case-study-icon-card__title">{title}</h4>
+  <p class="case-study-icon-card__text"><slot /></p>
+</article>

@@ -1,0 +1,6 @@
+---
+// `## Heading` in a page's markdown: a second section-level heading inside
+// a <Section>, e.g. "Next Steps".
+const { id } = Astro.props;
+---
+<h2 id={id} class="case-study-section__title"><slot /></h2>

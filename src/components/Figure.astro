@@ -1,0 +1,51 @@
+---
+// A single image or video with an optional caption (.case-study-figure).
+// Use it when the figure needs one of the style options; a plain markdown
+// image on its own line already becomes a default figure.
+//
+//   <Figure plain caption="First sketch from executive">
+//   ![A dense executive sketch…](/assets/images/projects/conference-display/executive-sketch.png)
+//   </Figure>
+//
+// The caption can also be the image's markdown title: ![Alt](src "Caption").
+interface Props {
+  caption?: string;
+  // Borderless, full-bleed image.
+  plain?: boolean;
+  // Extra space around the image inside the frame.
+  padded?: boolean;
+  // A fixed-height cropped preview (the full image opens in the lightbox).
+  crop?: boolean;
+  // Show the image at its own width, centered, instead of stretching it.
+  // Give the <img> a width attribute for SVGs.
+  natural?: boolean;
+}
+
+import { lazy } from '../lib/images';
+
+const { caption, plain = false, padded = false, crop = false, natural = false } = Astro.props;
+const html = await Astro.slots.render('default');
+let media = html.match(/<video\b[\s\S]*?<\/video>|<img\b[^>]*>/)?.[0] ?? '';
+// A markdown image title becomes the caption (moved off the <img>, where it
+// would show as a hover tooltip). It's already HTML-escaped.
+const titleCaption = media.match(/^<img\b[^>]*\stitle="([^"]*)"/)?.[1];
+media = media.startsWith('<img') ? lazy(media.replace(/\stitle="[^"]*"/, '')) : media;
+---
+<figure
+  class:list={[
+    'case-study-figure',
+    {
+      'case-study-figure--crop': crop,
+      'case-study-figure--plain': plain,
+      'case-study-figure--padded': padded,
+      'case-study-figure--natural-size': natural,
+    },
+  ]}
+>
+  <div class="case-study-figure__media"><Fragment set:html={media} /></div>
+  {caption ? (
+    <figcaption class="case-study-figure__caption">{caption}</figcaption>
+  ) : titleCaption ? (
+    <figcaption class="case-study-figure__caption"><Fragment set:html={titleCaption} /></figcaption>
+  ) : null}
+</figure>

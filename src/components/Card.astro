@@ -1,0 +1,20 @@
+---
+// One card in <Cards>. Write its bullet list as plain markdown.
+interface Props {
+  // Optional anchor, so the intro nav can link to the card.
+  id?: string;
+  title: string;
+}
+
+const { id, title } = Astro.props;
+// Markdown lists render with the section list style; cards use their own.
+// Matches the opening text only: the dev server adds attributes after it.
+const html = (await Astro.slots.render('default')).replace(
+  /<ul class="case-study-list[^"]*"/g,
+  '<ul class="case-study-card__list"',
+);
+---
+<article id={id} class="case-study-card" role="listitem">
+  <h3 class="case-study-card__title">{title}</h3>
+  <Fragment set:html={html} />
+</article>

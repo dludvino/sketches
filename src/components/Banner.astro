@@ -1,0 +1,28 @@
+---
+// The site header: logo, a link to the portfolio, and the mobile overflow menu
+// (toggled by src/js/banner.js). The logo goes to the Sketch Book's own list;
+// "All projects" goes to the hub at dennisludvino.com.
+const email = 'dludvino@gmail.com';
+const links = [
+  { href: 'https://portfolio.dennisludvino.com', label: 'Portfolio' },
+  { href: 'https://dennisludvino.com', label: 'All projects' },
+];
+---
+<header class="banner">
+  <div class="container banner-inner">
+    <a class="logo" href="/"><img src="/assets/images/sig2.svg" alt="Sketch Book home" height="44" /></a>
+    <nav class="banner-nav">
+      {links.map(({ href, label }) => <a href={href}>{label}</a>)}
+    </nav>
+    <nav class="banner-nav banner-nav--right">
+      <a href={`mailto:${email}`}>{email}</a>
+    </nav>
+    <button class="banner-overflow-btn" aria-label="Menu" type="button">
+      <img src="/assets/images/Icon-Menu.svg" alt="Menu" class="menu-icon" />
+    </button>
+  </div>
+  <nav class="banner-overflow-menu">
+    {links.map(({ href, label }) => <a class="banner-overflow-menu__section" href={href}>{label}</a>)}
+    <a href={`mailto:${email}`}>{email}</a>
+  </nav>
+</header>

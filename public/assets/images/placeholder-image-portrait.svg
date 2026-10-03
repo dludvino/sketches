@@ -1,0 +1,8 @@
+<svg width="480" height="720" viewBox="0 0 480 720" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Placeholder image">
+  <rect width="480" height="720" fill="#EEF0F2"/>
+  <g transform="translate(144 240) scale(3)">
+    <rect x="10" y="42" width="44" height="12" rx="2" fill="#D5DADF"/>
+    <path d="M16 42L28 28L36 36L42 30L52 42H16Z" fill="#B6BEC8"/>
+    <circle cx="23" cy="21" r="5" fill="#C7CED7"/>
+  </g>
+</svg>

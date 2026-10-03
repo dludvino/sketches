@@ -1,0 +1,23 @@
+---
+import NoiseTexture from './NoiseTexture.astro';
+
+// A body section on a case study or project page (.case-study-section).
+// `id` is the anchor the intro nav links to; the heading gets `${id}-title`.
+// A section with no visible heading takes a `label` for screen readers.
+// `accent` gives it the purple-wash background with the dotted texture.
+interface Props {
+  id: string;
+  title?: string;
+  label?: string;
+  accent?: boolean;
+}
+
+const { id, title, label, accent = false } = Astro.props;
+---
+<section id={id} class:list={['case-study-section', { 'case-study-section--accent': accent }]} aria-labelledby={title && `${id}-title`} aria-label={title ? undefined : label}>
+  {accent && <NoiseTexture id={`${id}-noise`} color="rgba(128, 0, 255, 0.12)" />}
+  <div class="container case-study-section__inner">
+    {title && <h2 id={`${id}-title`} class="case-study-section__title">{title}</h2>}
+    <slot />
+  </div>
+</section>

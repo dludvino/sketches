@@ -1,0 +1,15 @@
+---
+// A small grid of concepts, each an icon, a title, and a line or two:
+//
+//   <IconCards label="Key user considerations">
+//   <IconCard icon="/assets/images/case-study/ai/Context.svg" title="Context">Where am I?<br />What am I looking at?</IconCard>
+//   </IconCards>
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+<div class="case-study-icon-cards" role="list" aria-label={label}>
+  <slot />
+</div>

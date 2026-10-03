@@ -1,0 +1,8 @@
+---
+// Markdown numbered lists (`1. item`). Like bullet lists, they get the
+// --emphasis style when every item starts with bold text.
+import { startsWithBold } from '../../lib/lists';
+
+const html = await Astro.slots.render('default');
+---
+<ol class:list={['case-study-list', 'case-study-list--numbered', { 'case-study-list--emphasis': startsWithBold(html) }]}><Fragment set:html={html} /></ol>

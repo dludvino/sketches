@@ -1,0 +1,8 @@
+---
+// Markdown bullet lists (`- item`). When every item starts with bold text
+// (`- **Sunk Cost** - …`), the list gets the roomier --emphasis style.
+import { startsWithBold } from '../../lib/lists';
+
+const html = await Astro.slots.render('default');
+---
+<ul class:list={['case-study-list', { 'case-study-list--emphasis': startsWithBold(html) }]}><Fragment set:html={html} /></ul>

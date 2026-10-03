@@ -1,0 +1,79 @@
+---
+// A storyboard: a grid of boards, each with its notes as a caption clamped to
+// two lines, with the full text in a hover tooltip and the lightbox. Write
+// each board as its image followed by its notes:
+//
+//   <Storyboard label="Episode 1 storyboard boards" caption="Episode 1 Storyboard">
+//
+//   ![Blank opening frame](./episode-1-board-01.jpg)
+//   Open on blank screen.
+//
+//   ![The MX908 on a table](./episode-1-board-02.jpg)
+//   **VO:** Every file tells a story.
+//
+//   Slow push in on the device.
+//
+//   </Storyboard>
+//
+// Everything between one image and the next is that board's notes.
+interface Props {
+  // Screen-reader name for the grid of boards.
+  label: string;
+  // Caption under the whole storyboard.
+  caption: string;
+  cols?: 2 | 3 | 4;
+}
+
+import { lazy } from '../lib/images';
+
+const { label, caption, cols = 4 } = Astro.props;
+const html = await Astro.slots.render('default');
+
+// Flatten paragraphs into a stream of images and note paragraphs: drop the
+// <p> tags, keeping each paragraph end as a break.
+const BREAK = '\u0000';
+const flat = html.replace(/<p\b[^>]*>/g, '').replace(/<\/p>/g, BREAK);
+const parts = flat.split(/(<img\b[^>]*>)/);
+
+const decode = (text: string) =>
+  text
+    .replace(/<[^>]+>/g, '')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
+    .replace(/&quot;/g, '"')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&amp;/g, '&');
+
+const boards = [];
+for (let i = 1; i < parts.length; i += 2) {
+  const notes = (parts[i + 1] ?? '')
+    .split(BREAK)
+    .map((note) => note.trim())
+    .filter(Boolean);
+  boards.push({
+    img: lazy(parts[i]),
+    notes,
+    tooltip: notes.map(decode).join('\n\n'),
+  });
+}
+---
+<figure class="case-study-figure case-study-figure--padded">
+  <div class="case-study-figure__media">
+    <div class={`case-study-image-grid case-study-image-grid--cols-${cols} case-study-image-grid--plain`} role="list" aria-label={label}>
+      {boards.map(({ img, notes, tooltip }) => (
+        <figure class="case-study-image-grid__item" role="listitem">
+          <Fragment set:html={img} />
+          {notes.length > 0 && (
+            <figcaption class="case-study-image-grid__note" data-tooltip={tooltip}>
+              <div class="case-study-image-grid__note-text">
+                {notes.map((note) => <p set:html={note} />)}
+              </div>
+            </figcaption>
+          )}
+        </figure>
+      ))}
+    </div>
+  </div>
+  <figcaption class="case-study-figure__caption">{caption}</figcaption>
+</figure>

@@ -1,0 +1,14 @@
+// Cloudflare Worker with static assets, served at sketches.dennisludvino.com.
+// Cloudflare runs `npx wrangler deploy` on every push to master (once GitHub is
+// connected), which runs the build below first. Only dist/ is published.
+{
+  "name": "sketches",
+  "compatibility_date": "2026-09-01",
+  "routes": [{ "pattern": "sketches.dennisludvino.com", "custom_domain": true }],
+  "build": {
+    "command": "npm run build"
+  },
+  "assets": {
+    "directory": "./dist"
+  }
+}
